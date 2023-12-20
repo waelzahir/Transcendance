@@ -82,14 +82,16 @@ model rooms {
 }
 
 model rooms_members {
-  id           Int             @id @unique @default(autoincrement())
-  roomid       Int
-  userid       Int
-  permission   user_permission
-  member_state room_state      @default(DEFAULT)
-  created_at   DateTime        @default(now())
-  user_id      user            @relation(fields: [userid], references: [id])
-  rooms        rooms           @relation(fields: [roomid], references: [id], onDelete: Cascade)
+  id         Int             @id @unique @default(autoincrement())
+  roomid     Int
+  userid     Int
+  permission user_permission
+  isblocked  Boolean         @default(false)
+  ismuted    Boolean         @default(false)
+  isBanned   Boolean         @default(false)
+  created_at DateTime        @default(now())
+  user_id    user            @relation(fields: [userid], references: [id])
+  rooms      rooms           @relation(fields: [roomid], references: [id], onDelete: Cascade)
 
   @@unique([roomid, userid], name: "combination")
 }
@@ -172,11 +174,4 @@ enum game_state {
   PENDING
   IN_PLAY
   FINISHED
-}
-
-enum room_state {
-  DEFAULT
-  BLOCKED
-  MUTED
-  BANNED
 }
