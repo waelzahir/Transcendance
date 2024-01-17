@@ -32,14 +32,9 @@ export class AppGateway {
 	@WebSocketServer()
 	server :Server;
 
- 	async handleConnection(client ) {
-		let user;
-		 try
-		 {
-				user = (await this.jwtServide.verify(client.request.headers.cookie.match(/(?<=atToken=)(.*?)(?=;|$)/)[0] , {
-					"secret" : conf.get('AT_SECRET')
-				}))
-				client.join(user["user42"])
+	async welcome(client, user)
+	{
+		client.join(user["user42"])
 				if ((await this.server.to(user["user42"]).fetchSockets()).length == 1)
 				{
 					const	state = await this.prisma.user.update({where:{user42:user["user42"],},data:{connection_state: current_state.ONLINE}});
@@ -47,9 +42,33 @@ export class AppGateway {
 				}
 
 				console.log(user["user42"] , "connected")
+	}
+
+ 	async handleConnection(client ) {
+		let user;
+		 try
+		 {
+				user = (await this.jwtServide.verify(client.request.headers.cookie.match(/(?<=atToken=)(.*?)(?=;|$)/)[0] , {
+					"secret" : conf.get('AT_SECRET')
+				}))
+				this.welcome(client, user)
+				console.log("atconnect")				
 			}
 			catch (e)
 			{
+				try
+				{
+					user = (await this.jwtServide.verify(client.request.headers.cookie.match(/(?<=rtToken=)(.*?)(?=;|$)/)[0] , {
+						"secret" : conf.get('RT_SECRET')
+					}))
+					console.log("rt connect")
+					this.welcome(client, user)
+				}
+				catch(e)
+				{
+				}
+
+				
 				client.disconnect()
 			}
 	}
@@ -66,18 +85,7 @@ export class AppGateway {
 
 		}
 	}	
-	@SubscribeMessage("HANDSHAKE")
-	async sayHitoserver(@GetCurrentUser("user42") identifier:string, @GetCurrentUser("sub") id:number, @ConnectedSocket() client)
-	{
-		
-		client.join(identifier)
-		if ((await this.server.to(identifier).fetchSockets()).length == 1)
-		{
-			const	state = await this.prisma.user.update({where:{user42:identifier,},data:{connection_state: current_state.ONLINE}});
-			this.statusnotify.emit("PUSHSTATUS", state.user42 , [{ nickname:state.nickname , connection_state: state.connection_state}])
-		}
-		
-	}
+
 	
 	@SubscribeMessage("ONNSTATUS")
 	async getPrimarystatus( @GetCurrentUser("user42") identifier:string, @ConnectedSocket() client)
