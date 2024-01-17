@@ -110,7 +110,6 @@ const App = () => {
 	}
 	if (userin.current) {
 		socket.connect();
-		socket.off("HANDSHAKE").on("HANDSHAKE", () => socket.emit("HANDSHAKE", "hhhhhhhhhhhhhhhhh li ..."));
 	}
 
 	console.log("status", status);
