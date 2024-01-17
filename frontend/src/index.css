@@ -7,6 +7,11 @@
 	--bgColor:  #F2F2F2;
 }
 
+#root{
+	height: 100%;
+	width: 100%;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -14,8 +19,13 @@
 	scroll-behavior: smooth;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	background-color: var(--bgColor);
+	height: 100%;
 }
 
 .GameBoy{
