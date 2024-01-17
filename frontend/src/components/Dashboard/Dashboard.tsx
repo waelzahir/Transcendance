@@ -107,5 +107,6 @@ export default function Dashboard({status} : {status: Map<string, string>}) {
 			<History History={gamesdata} />
 			<Footer />
 		</div>
+		
 	);
 }

@@ -88,12 +88,12 @@ const addFR = () => {
 	return (
 		<div className="ProfileDiv Ft min-[0px]:mx-5 2xl:m-auto flex min-[0px]:flex-col-reverse lg:flex-row border-solid border-4 border-black shadow-[2px_4px_0px_0px_#000301] p-10 2xl:w-full max-w-[1536px]">
 			<div className="LeftDiv flex flex-col lg:w-[75%] justify-between ">
-				<h1 className="ModUserName min-[0px]:text-xl md:text-3xl font-bold font-Nova uppercase">
+				<h1 className="ModUserName text-xs sm:text-xl md:text-2xl lg:text-3xl font-bold font-Nova uppercase truncate">
 					{usr.user42}
 				</h1>
 				<div className="SocialHolder flex sm:gap-y-2 justify-content-center w-[40%]">
 					<div className="mt-4">
-						<h2 className="UserNick font-Nova min-[0px]:text-lg md:text-2xl font-semibold mr-8 uppercase">
+						<h2 className="UserNick font-Nova text-xs sm:text-xl md:text-2xl font-semibold sm:mr-8 uppercase truncate italic">
 							{usr.nickname}
 						</h2>
 					</div>
@@ -119,29 +119,29 @@ const addFR = () => {
 				</div>
 				<div className="flex flex-col mt-2">
 					{status.get(usr.nickname) == "ONLINE" ? (
-						<p className="UserStatus text-sm sm:text-base lg:text-xl mt-2 mr-4 text-sucessColor font-extrabold font-Nova">
+						<p className="UserStatus text-sm sm:text-base lg:text-xl mt-2 mr-4 text-sucessColor font-extrabold font-Nova truncate ">
 							{status.get(usr.nickname)}
 						</p>
 					) : status.get(usr.nickname) == "OFFLINE" ? (
-						<p className="UserStatus text-xl mt-2 mr-4 text-PersianRed font-extrabold font-Nova">
+						<p className="UserStatus text-xs sm:text-base md:text-xl mt-2 mr-4 text-PersianRed font-extrabold font-Nova truncate ">
 							{status.get(usr.nickname)}
 						</p>
 					) : (
-						<p className="UserStatus text-xl mt-2 mr-4 text-InGame font-extrabold font-Nova animate-pulse">
+						<p className="UserStatus text-xs sm:text-base md:text-xl mt-2 mr-4 text-InGame font-extrabold font-Nova animate-pulse truncate ">
 							{status.get(usr.nickname)}
 						</p>
 					)}
 					{who ? (
 						<div>
 							<textarea
-								className="UserDescription min-[0px]:mt-3 mr-4 sm:mt-3 md:mt-4 min-[0px]:text-base md:text-lg w-[90%] min-h-[5rem] max-h-[12rem] text-[#959490] ring-4 p-3 m-1 border-black ring-black hover:ring-blue shadow-[2px_4px_0px_0px_#000301]"
+								className="UserDescription min-[0px]:mt-3 mr-4 sm:mt-3 md:mt-4 text-sm sm:text-base md:text-lg w-[90%] min-h-[5rem] max-h-[12rem] text-[#959490] ring-4 p-3 m-1 border-black ring-black hover:ring-blue shadow-[2px_4px_0px_0px_#000301]"
 								placeholder={!usr?.status ? "Tell Us About Yourself ..." : usr?.status}
 								onChange={(e) => setPostContent(e.target.value)}
 							></textarea>
 							<button
 								type="submit"
 								onClick={async () => await updateStatus()}
-								className="border-black border-4 border-solid w-[25%] mt-6 font-Nova p-2 text-lg  text-white font-bold bg-black hover:bg-buttonColor hover:text-black  shadow-[2px_8px_6px_0px_#747474]"
+								className="border-black border-4 border-solid w-[100%] min-[250px]:w-[50%] min-[600px]:w-[40%] sm:w-[25%] mt-6 font-Nova p-2 text-xs sm:text-base md:text-lg  text-white font-bold bg-black hover:bg-buttonColor hover:text-black  shadow-[2px_8px_6px_0px_#747474] truncate"
 							>
 								submit
 							</button>
@@ -151,7 +151,7 @@ const addFR = () => {
 							{usr.status}
 						</p>
 					) : (
-						<p className="w-[30%] min-[0px]:text-base md:text-[20px] text-[#959490] font-extrabold font-Nova my-8 p-4 italic capitalize border-black border-solid border-2 shadow-[2px_4px_0px_0px_#000301]">
+						<p className="truncate w-[30%] min-[0px]:text-base md:text-[20px] text-[#959490] font-extrabold font-Nova my-8 p-4 italic capitalize border-black border-solid border-2 shadow-[2px_4px_0px_0px_#000301]">
 							No Status set
 						</p>
 					)}
@@ -162,7 +162,7 @@ const addFR = () => {
 					{who ? <UploadTest /> : null}
 					<img
 						src={!usr || !usr.avatar ? Profil : usr.avatar}
-						className="border-4 min-[0px]:h-[12rem] lg:h-[14rem] min-[0px]:w-[12rem] lg:w-[14rem] xl:w-[16rem] xl:h-[16rem] border-black border-solid shadow-[2px_4px_0px_0px_#000301]"
+						className="border-4 min-[0px]:h-[6rem] min-[0px]:w-[6rem] sm:h-[10rem] sm:w-[10rem] lg:h-[14rem] lg:w-[14rem] xl:w-[16rem] xl:h-[16rem] border-black border-solid shadow-[2px_4px_0px_0px_#000301]"
 						alt="User profile picture"
 					></img>
 				</div>

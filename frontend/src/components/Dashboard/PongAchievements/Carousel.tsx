@@ -55,9 +55,9 @@ export default function Carousel({ achivments }: { achivments: any | null }) {
 	};
 	const l = achivments?.achieved?.length;
 	return (
-		<div className="carousel min-[0px]:mx-5 2xl:m-auto flex flex-col justify-center border-solid border-4 border-black max-w-[1536px] shadow-[2px_4px_0px_0px_#000301]">
+		<div className="carousel sm:mx-5 2xl:m-auto flex flex-col justify-center border-solid border-4 border-black max-w-[1536px] shadow-[2px_4px_0px_0px_#000301] p-2 sm:p-6">
 			<div>
-				<h1 className="title font-Nova text-center font-bold min-[0px]:text-xl xl:text-2xl text-3xl p-4 border-4 border-solid border-black m-9 mb-0 shadow-[2px_4px_0px_0px_#000301] bg-white">
+				<h1 className="truncate title font-Nova text-center font-bold text-xs sm:text-lg lg:text-2xl xl:text-3xl p-2 sm:p-4 border-4 border-solid border-black m-8 sm:m-9 mb-0 shadow-[2px_4px_0px_0px_#000301] bg-white">
 					{" "}
 					PONG ACHIEVEMENTS
 				</h1>
@@ -76,7 +76,7 @@ export default function Carousel({ achivments }: { achivments: any | null }) {
 					);
 				})}
 			</div>
-			<div className="carousel-buttons flex justify-evenly mb-7 p-6 border-4 border-solid boder-black m-9 mt-0 min-[0px]:gap-x-[55%] shadow-[2px_4px_0px_0px_#000301] bg-white">
+			<div className="carousel-buttons flex justify-evenly mb-6 sm:mb-7 p-2 sm:p-6 border-4 border-solid boder-black m-8 sm:m-9 mt-0 gap-x-[55%] shadow-[2px_4px_0px_0px_#000301] bg-white">
 				<button
 					className="button-arrow cursor-pointer"
 					onClick={() => {

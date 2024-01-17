@@ -12,6 +12,7 @@ import { EventEmitterModule } from "@nestjs/event-emitter";
 import { JwtModule } from "@nestjs/jwt";
 import { ProfileModule } from "./profile/profile.module";
 import { RepositoryModule } from "./repository/repository.module";
+import { VidchatModule } from './vidchat/vidchat.module';
 
 @Module({
 	imports: [
@@ -24,7 +25,8 @@ import { RepositoryModule } from "./repository/repository.module";
 		UsersModule,
 		InviteModule,
 		ProfileModule,
-		RepositoryModule
+		RepositoryModule,
+		VidchatModule
 	],
 
 	providers: [

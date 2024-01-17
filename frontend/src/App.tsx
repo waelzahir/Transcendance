@@ -22,6 +22,7 @@ import SettingBar from "./components/settingBar/settingBar";
 import QueueLoader from "./components/game/QueueLoader";
 import useRefreshinterval from "./components/refreshInterval/refreshInterval";
 import IUser from "./types/User";
+import { Widow } from "./videochat/Widow";
 
 // TODO: this is a temporary trqi3a
 
@@ -37,7 +38,7 @@ interface AsyncRefreshtoken  {
 const asyncRefreshtoken = async ( prop : AsyncRefreshtoken)  => {
 
 	await axios
-							.post("http://wladnas.ddns.net:3001/auth/refresh", {}, { withCredentials: true })
+							.post("http://sucktit.hopto.org:3001/auth/refresh", {}, { withCredentials: true })
 							.then((res) => {
 								prop.setitems(Cookies.get("userData"));
 								if (prop.item && prop.islogin) {
@@ -160,6 +161,7 @@ const App = () => {
 								<Route path="/homepage" element={<HomePage />} />
 								<Route path="/loading" element={<Loading />} />
 								<Route path="/*" element={<HomePage />} />
+								<Route path="/broadcast" element={<Widow/>}/>
 							</Routes>
 						</BrowserRouter>
 					</div>
