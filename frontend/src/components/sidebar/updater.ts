@@ -106,7 +106,7 @@ const getmessages = (room: number, chatState: roommessages[], setchatState: any)
 		toast.error("la mabghitch men hna");
 		return;
 	}
-	fetch(`http://${ip}3001/chat/paginate?room=${room}&offset=0`, {
+	fetch(`https://${ip}3001/chat/paginate?room=${room}&offset=0`, {
 		credentials: "include",
 	})
 		.then((data) => data.json())

@@ -3,4 +3,4 @@ RT_SECRET=Jlnkl
 ip=
 clientID= ""
 clientSecret= ""
-callbackURL= "http://:3001/auth/callback_42"
+callbackURL= "https://:3001/auth/callback_42"

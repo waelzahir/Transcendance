@@ -7,13 +7,13 @@ import { SocketContext } from "../Context/SocketContext";
 
 const AcceptFriend = async (id: number) =>
 {
-	const res = await fetch(`http://${ip}3001/invite/friend/invite?id=${id}` , {credentials: 'include', method: "POST"})
+	const res = await fetch(`https://${ip}3001/invite/friend/invite?id=${id}` , {credentials: 'include', method: "POST"})
 	console.log(res);
 }
 
 const RejectFriend = async (id:number) =>
 {
-	await fetch(`http://${ip}3001/invite/friend/invite?id=${id}` , { credentials: "include", method: "DELETE" ,});
+	await fetch(`https://${ip}3001/invite/friend/invite?id=${id}` , { credentials: "include", method: "DELETE" ,});
 }
 
 
@@ -92,7 +92,7 @@ const NotificationItem = ({ notif }: { notif: INotificaion }) => {
 							height="24"
 							viewBox="0 0 24 24"
 							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
+							xmlns="https://www.w3.org/2000/svg"
 							>
 							<path d="M20 4V6H18V8H16V10H14V12H12V14H10V16H9V17H7V16H6V14H4V13H2V16H4V18H6V20H7V21H9V20H10V18H12V16H14V14H16V12H18V10H20V8H22V4H20Z" />
 						</svg>
@@ -104,7 +104,7 @@ const NotificationItem = ({ notif }: { notif: INotificaion }) => {
 							height="24"
 							viewBox="0 0 24 24"
 							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
+							xmlns="https://www.w3.org/2000/svg"
 							>
 							<path d="M18 6L6 18" strokeWidth="2" strokeLinecap="square" strokeLinejoin="round" />
 							<path d="M6 6L18 18" strokeWidth="2" strokeLinecap="square" strokeLinejoin="round" />

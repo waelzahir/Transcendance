@@ -14,12 +14,14 @@ import { RoomGuard } from 'src/common/guards/chat/RoomGuards.guard';
 import { RoomStatus } from 'src/common/decorators/RoomStatus.deorator';
 import { Roomstattypes } from 'src/types.ts/statustype';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { WsValidationExeption } from 'src/filters/ws.exeption.filter';
 
 
 @WebSocketGateway({ transports: ["websocket"] })
 @UsePipes(new ValidationPipe())
 @UseGuards(RoomGuard)
 @UseGuards(AtGuard)
+@UseFilters(WsValidationExeption)
 export class ChatGateway {
   constructor(
 		private readonly prisma: PrismaService,
@@ -317,7 +319,7 @@ export class ChatGateway {
 		}
 		this.server.to(Message.room.toString()).emit("ACTION", {region: "ROOM", action:"update" , data: res})
 		this.server.to(Message.room.toString()).emit("NOTIFY", ` ${identifier} muted ${res.user_id.nickname}`)
-	}
+		}
 
 
 

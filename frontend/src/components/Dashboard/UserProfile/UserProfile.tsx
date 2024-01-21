@@ -10,7 +10,7 @@ import { UploadTest } from "../../UploadComponent";
 const useGetFrienshipsStatus = async (setisFriend: any, dashstate: IUser) => {
 	try {
 		useEffect(() => {
-			fetch(`http://${ip}3001/profile/friendship/${dashstate?.id}`, {
+			fetch(`https://${ip}3001/profile/friendship/${dashstate?.id}`, {
 				method: "GET",
 				credentials: "include",
 			})
@@ -33,7 +33,7 @@ export default function ProfileDiv({ status, who, usr, func }: { status: Map<str
 	const [postContent, setPostContent] = useState("");
 	const [isFriend, setisFriend] = useState<boolean>(false);
 	const updateStatus = async () => {
-		const response = await fetch(`http://${ip}3001/profile/updateStatus`, {
+		const response = await fetch(`https://${ip}3001/profile/updateStatus`, {
 			method: "PATCH",
 			credentials: "include",
 			headers: {
@@ -53,7 +53,7 @@ export default function ProfileDiv({ status, who, usr, func }: { status: Map<str
 		}
 	};
 	const RmFR = () => {
-        fetch(`http://${ip}3001/invite/friend?friend=${usr.id}`, {
+        fetch(`https://${ip}3001/invite/friend?friend=${usr.id}`, {
             method: "DELETE",
             credentials: "include",
         })
@@ -69,7 +69,7 @@ export default function ProfileDiv({ status, who, usr, func }: { status: Map<str
             .catch(() => toast.error(`search: network error`));
     };
 const addFR = () => {
-        fetch(`http://${ip}3001/invite/friend?friend=${usr.id}`, {
+        fetch(`https://${ip}3001/invite/friend?friend=${usr.id}`, {
             method: "POST",
             credentials: "include",
         })

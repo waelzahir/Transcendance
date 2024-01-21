@@ -14,10 +14,12 @@ export class VidchatGateway {
 
   async handleConnection(client)
   {
+    
     this.ids.set(client.id, Date.now().toString() )
     console.log(this.ids)
     client.emit("MYID", this.ids.get(client.id))
     this.server.except(client.id).emit("ONLINE", this.ids.get(client.id))
+    
   }
 
   async handleDisconnect(client) {

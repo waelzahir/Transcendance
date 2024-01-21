@@ -4,7 +4,7 @@ import { ip } from "../network/ipaddr";
 
 export default function useRooms(rerender: boolean, setRooms: any) {
 	useEffect(() => {
-		const data = fetch("http://" + ip + "3001/chat/town",
+		const data = fetch("https://" + ip + "3001/chat/town",
 		{
 			credentials: 'include'
 	  })

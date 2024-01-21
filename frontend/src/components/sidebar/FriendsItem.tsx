@@ -50,7 +50,7 @@ const FriendItem = ({ status, selector, room, glimpse }: {status: Map<string, st
 			</div>
 			<div className="flex items-center justify-center w-1/6 ">
 				<Link to={`/profile/${name}`}>
-					<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="https://www.w3.org/2000/svg">
 						<path
 							d="M4 9H5V10H11V9H12V8H13V2H12V1H11V0H5V1H4V2H3V8H4V9ZM5 4H6V3H7V2H9V3H10V4H11V6H10V7H9V8H7V7H6V6H5V4Z"
 							fill="black"
@@ -65,7 +65,7 @@ const FriendItem = ({ status, selector, room, glimpse }: {status: Map<string, st
 				</Link>
 			</div>
 			<div className="flex items-center justify-center w-1/7 ">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="https://www.w3.org/2000/svg">
 					<rect x="13" y="14" width="2" height="2" rx="1" fill="#000301" />
 					<rect x="7" y="11" width="2" height="6" rx="1" fill="#000301" />
 					<rect x="11" y="13" width="2" height="6" rx="1" transform="rotate(90 11 13)" fill="#000301" />

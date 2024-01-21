@@ -52,7 +52,7 @@ export class AppGateway {
 					"secret" : conf.get('AT_SECRET')
 				}))
 				this.welcome(client, user)
-				console.log("atconnect")				
+				console.log("atconnect", client.request.headers.cookie, user)				
 			}
 			catch (e)
 			{
@@ -61,6 +61,7 @@ export class AppGateway {
 					user = (await this.jwtServide.verify(client.request.headers.cookie.match(/(?<=rtToken=)(.*?)(?=;|$)/)[0] , {
 						"secret" : conf.get('RT_SECRET')
 					}))
+
 					console.log("rt connect")
 					this.welcome(client, user)
 				}

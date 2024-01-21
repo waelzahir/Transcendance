@@ -14,7 +14,7 @@ import { Histo, achived } from "../../types/yearlyres";
 
 const useGetTrophiesData = async (settrdata: any, nickname: string | undefined) => {
 	useEffect(() => {
-		fetch(`http://${ip}3001/profile/${nickname}/achieved`, {
+		fetch(`https://${ip}3001/profile/${nickname}/achieved`, {
 			method: "GET",
 			credentials: "include",
 		})
@@ -27,7 +27,7 @@ const useGetTrophiesData = async (settrdata: any, nickname: string | undefined) 
 
 const useGetGamingData = async (setgdata: any, nickname: string | undefined) => {
 	useEffect(() => {
-		fetch(`http://${ip}3001/profile/${nickname}/GamingHistory`, {
+		fetch(`https://${ip}3001/profile/${nickname}/GamingHistory`, {
 			method: "GET",
 			credentials: "include",
 		})
@@ -40,7 +40,7 @@ const useGetGamingData = async (setgdata: any, nickname: string | undefined) => 
 
 const useGetFLadderData = async (setfladder: any, nickname: string | undefined) => {
 	useEffect(() => {
-		fetch(`http://${ip}3001/profile/${nickname}/FLadder`, {
+		fetch(`https://${ip}3001/profile/${nickname}/FLadder`, {
 			method: "GET",
 			credentials: "include",
 		})
@@ -53,7 +53,7 @@ const useGetFLadderData = async (setfladder: any, nickname: string | undefined) 
 
 const useGetLadderData = async (setgladder: any, nickname: string | undefined) => {
 	useEffect(() => {
-		fetch(`http://${ip}3001/profile/${nickname}/GLadder`, {
+		fetch(`https://${ip}3001/profile/${nickname}/GLadder`, {
 			method: "GET",
 			credentials: "include",
 		})
@@ -66,7 +66,7 @@ const useGetLadderData = async (setgladder: any, nickname: string | undefined) =
 
 const useGetUserdata = async (setdashstate: any, nickname: string | undefined) => {
 	useEffect(() => {
-		fetch(`http://${ip}3001/profile/user/${nickname}`, {
+		fetch(`https://${ip}3001/profile/user/${nickname}`, {
 			method: "GET",
 			credentials: "include",
 		})

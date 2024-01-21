@@ -17,7 +17,7 @@ const useInvites = (setNotification:any)=>
 	{
 		const fetchData = async () =>
 		{
-			fetch(`http://${ip}3001/invite`, {credentials: "include"})
+			fetch(`https://${ip}3001/invite`, {credentials: "include"})
 			.then((data)=> data.json())
 			.then((data) =>
 			{

@@ -70,7 +70,7 @@ export const SearchWindow = () => {
 	const query = params.get("query");
 	const socket = useContext(SocketContext);
 	useEffect(() => {
-		fetch(`http://${ip}3001/chat/search/${query}`, {
+		fetch(`https://${ip}3001/chat/search/${query}`, {
 			credentials: "include",
 		})
 			.then((data) => data.json())
@@ -80,7 +80,7 @@ export const SearchWindow = () => {
 				if (Array.isArray(data)) roomstate(data);
 			})
 			.catch(() => toast.error(`search: network error`));
-		fetch(`http://${ip}3001/users/search/${query}`, {
+		fetch(`https://${ip}3001/users/search/${query}`, {
 			credentials: "include",
 		})
 			.then((data) => data.json())

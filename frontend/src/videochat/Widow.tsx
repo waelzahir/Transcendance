@@ -4,10 +4,11 @@ import IUser from "../types/User"
 import { ip } from "../network/ipaddr"
 import { toast } from "react-toastify"
 import { AnimatedElement } from "../components/game/GameSetup";
+import { Stream } from "stream";
 
 
 
-const socket: Socket = io(`ws://${ip}3001/hanan`, { autoConnect: false, transports: ["websocket"] });
+// const socket: Socket = io(`wss://${ip}3001/hanan`, { autoConnect: false, transports: ["websocket"] });
 
 const UserComponent = ({id}: {id :string}) =>
 {
@@ -37,61 +38,86 @@ export const Widow =() =>
     const [online , setOnline] = useState<string[]>([])
     const [me, setme] = useState<string>("")
     const [incall, setincall] = useState(false);
-    const outgoing = useRef()
-    const incoming = useRef()
+    const outgoing = useRef<HTMLVideoElement>(null)
+    const incoming = useRef(null)
 
+  
     useEffect(() =>
     {
-        socket.connect();
-        socket.on("MYID",  (data) => setme(data))
-        socket.on("ONLINE", (data) => {
-            const ndata = online.slice()
-            ndata.unshift(data)
-            setOnline(ndata)
-        })
-        socket.on("OFFLINE", (data) => {
-            const ndata = online.filter(nd =>  nd != data)
-            setOnline(ndata)
-        })
-        return () =>{
-            socket.off("MYID")
-            socket.off("ONLINE")
-            socket.off("OFFLINE")
-            socket.disconnect()
+
+        // setInterval(async () => {
+        //     const res = await fetch("")
+        //     if (res.ok)
+        //         setOnline(await res.json())
+        // }, 5000)
+        const   getMedia  = async () => 
+        {
+            // const devices = (await navigator.mediaDevices.enumerateDevices()).filter(device => device.kind === "videoinput")
+            const constraints = {
+                'video': true,
+                'audio': true
+            }
+            const stream =  await navigator.mediaDevices.getUserMedia(constraints)
+            if (outgoing.current)
+             outgoing.current.srcObject = stream
+
         }
+        getMedia()
     },[])
     let userlist;
     if (online)
         userlist = online.map((user) =>  <UserComponent key={user} id={user}/> )
     return (
-            <div className="flex justify-between w-full h-full bg-slate-600 m-auto">
+            <div className="flex-row  w-full h-full bg-slate-600 ">
             
-                <div className=" flex-row overflow-y-auto w-2/12 border-solid border-2 gap-y-4">
-                        <UserComponent id="me"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
-                        <UserComponent id="mamak"/>
+                <Header/>
+                <div className="h-[90%] flex   border-solid border-2 border-white">
+                        <div className="h-full flex-row overflow-y-auto w-2/12 border-solid border-2 gap-y-4">
+                            <UserComponent id="me"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                            <UserComponent id="mamak"/>
+                        </div>
+        
+                        <div className=" flex flex-col w-full h-full items-center justify-center  gap-y-8">
+                             
+                                <video ref={outgoing}  width="1024" height="900"  autoPlay ></video> 
+                      
+                            {/* <video  className="bg-white" width="854" height="480"></video> */}
+                        </div>
                 </div>
-                {
-                    incall ? 
-                    <div className="flex justify-center  items-center gap-x-4 m-auto">
-                        <video className="bg-black" width="854" height="480"></video>
-                       <video  className="bg-white" width="854" height="480"></video>
-                </div>
-                :
-                <AnimatedElement />
-                }
+                <Footer reff={outgoing.current}/>
             </div>
         )
+}
+const Header = () =>
+{
+    return (
+        <div className="w-full h-[5%] bg-black flex flex-col justify-center items-center">
+            <h1 className="text-white text-center"> mamak </h1>
+        </div>
+    )
+}
+
+const Footer = ({reff} : {reff:any}) => 
+{
+    return (
+        <div className="w-full h-[5%] bg-black flex flex-col justify-center items-center">
+        <h1 className="text-white text-center" onClick={async () => {
+          
+          
+        }}> babak </h1>
+    </div>
+    )
 }

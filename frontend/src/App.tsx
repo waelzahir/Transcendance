@@ -38,7 +38,7 @@ interface AsyncRefreshtoken  {
 const asyncRefreshtoken = async ( prop : AsyncRefreshtoken)  => {
 
 	await axios
-							.post("http://sucktit.hopto.org:3001/auth/refresh", {}, { withCredentials: true })
+							.post("https://sucktit.hopto.org:3001/auth/refresh", {}, { withCredentials: true })
 							.then((res) => {
 								prop.setitems(Cookies.get("userData"));
 								if (prop.item && prop.islogin) {
@@ -81,12 +81,12 @@ const App = () => {
 	useEffect(() => {
 		console.log("start");
 		const isLoggedIn = async () => {
-			const res = await fetch(`http://${ip}3001/users/isLogin`, { credentials: "include", method: "GET" })
+			const res = await fetch(`https://${ip}3001/users/isLogin`, { credentials: "include", method: "GET" })
 			.then(async (res) => {
 				if (!res.ok) {
 					
 						asyncRefreshtoken({setitems,item, setIsLogin,userin ,islogin})
-						throw new Error(`Error! status ${res.status}`);
+						// throw new Error(`Error! status ${res.status}`);
 					}
 
 					setitems(Cookies.get("userData"));
