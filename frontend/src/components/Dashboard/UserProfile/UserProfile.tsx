@@ -33,6 +33,7 @@ const useGetFrienshipsStatus = async (setisFriend: any, dashstate: IUser) => {
 export default function ProfileDiv({ status, who, usr, func }: { status: Map<string, string> , who: Boolean; usr: IUser; func: any }) {
 	const [postContent, setPostContent] = useState("");
 	const [isFriend, setisFriend] = useState<boolean>(false);
+	const [usrImg, setUsrImg] = useState(usr.avatar)
 	useEffect(() =>{
 		if (!who && status.get(usr.user42))
 			setisFriend(true)
@@ -166,9 +167,9 @@ const addFR = () => {
 			</div>
 			<div className="RightDiv flex place-content-start lg:place-content-center w-[90%] lg:w-[40%] lg:m-auto py-6 lg:py-0">
 				<div>
-					{who ? <UploadTest /> : null}
+					{who ? <UploadTest  setUsrImg={setUsrImg}/> : null}
 					<img
-						src={!usr || !usr.avatar ? Profil : usr.avatar}
+						src={ !usrImg.length ? Profil : usrImg}
 						className="border-4 min-[0px]:h-[12rem] lg:h-[14rem] min-[0px]:w-[12rem] lg:w-[14rem] xl:w-[16rem] xl:h-[16rem] border-black border-solid shadow-[2px_4px_0px_0px_#000301]"
 						alt="User profile picture"
 					></img>
