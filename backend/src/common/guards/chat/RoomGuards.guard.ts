@@ -35,11 +35,11 @@ export class RoomGuard implements CanActivate {
         const UserId = request.user[key];
         const key2 : keyof JwtPayloadWithRt | undefined = "user42";
 
-        var roomid;
+        var roomid ;
         if (reqType === "ws")
         {
             context.switchToWs().getClient().request.headers["user"] = request.user[key2];
-            roomid = context.switchToWs().getData().room;
+            roomid = +context.switchToWs().getData().room;
         }
         else
             roomid = +request.query["room"]

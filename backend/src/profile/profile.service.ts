@@ -8,13 +8,7 @@ import { http } from "winston";
 export class ProfileService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	create(createProfileDto: CreateProfileDto) {
-		return "This action adds a new profile";
-	}
 
-	findAll() {
-		return `This action returns all profile`;
-	}
 
 	async findOne(username: string) {
 		const data = await this.prisma.user.findFirst({
@@ -80,7 +74,7 @@ export class ProfileService {
 			},
 		});
 		if (user) throw new HttpException("ok", 200);
-		else throw new HttpException("not ok", 201);
+		else throw new HttpException("not ok", 400);
 	}
 
 	async getGlobalBoard(username: string) {

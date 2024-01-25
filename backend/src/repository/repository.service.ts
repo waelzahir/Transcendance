@@ -43,7 +43,7 @@ export class RepositoryService {
 				fs.unlinkSync(`./${location}/${user}/${filename}`);
 			}
 
-			throw new HttpException("Server: Error writing file", 500);
+			throw new HttpException("Server: Error writing file", HttpStatus.BAD_REQUEST);
 		}
 
 		const files = fs.readdirSync(`./${location}/${user}`);
