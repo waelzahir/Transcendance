@@ -9,13 +9,18 @@ type error = {
 
 
 const  HandleError = (res : Response) => {
-	res.json().then((json : error ) => {
+	try {
+		res.json().then((json : error | any ) => {
 		if (typeof(json.message) === "string")
-		toast.error(json.message)
-	
+			toast.error(json.message)
+		
 		if (Array.isArray(json.message))
-			toast.error(json.message[0])
-	}).catch(() => {
+			toast.error(json.message[0]);
+		
+	}).catch((err) => {
 	})
+}
+catch{
+}
 }
 export default HandleError;

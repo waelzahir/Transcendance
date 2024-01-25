@@ -40,7 +40,7 @@ export class AuthService {
 				throw error;
 			});
 		const isAble: boolean = await argon.verify(user.hash, dto.currentPassword);
-		if (!isAble) throw new UnauthorizedException( "current password not correct");
+		if (!isAble) throw new UnauthorizedException("current password not correct");
 
 		const newPassword: string = await argon.hash(dto.newPassword);
 		await this.prisma.user
@@ -201,7 +201,7 @@ export class AuthService {
 		if (!user) throw new UnauthorizedException("password not correct");
 
 		const passwordMatches = await argon.verify(user.hash, dto.password);
-		if (!passwordMatches) throw new UnauthorizedException("Access Denied");
+		if (!passwordMatches) throw new UnauthorizedException("password not correct");
 
 		const tokens = await this.getTokens(user.id, user.user42);
 		await this.updateRtHash(user.id, tokens.refresh_token);
@@ -235,9 +235,9 @@ export class AuthService {
 				id: userId,
 			},
 		});
-		if (!user || !user.hashedRt) throw new ForbiddenException("Access Denied");
+		if (!user || !user.hashedRt) throw new ForbiddenException("refresh token found");
 		const rtMatches = await argon.verify(user.hashedRt, rt);
-		if (!rtMatches) throw new ForbiddenException("Access Denied");
+		if (!rtMatches) throw new ForbiddenException("refresh token not found");
 
 		const tokens = await this.getTokens(user.id, user.user42);
 		await this.updateRtHash(user.id, tokens.refresh_token);
