@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { CreateProfileDto } from "./dto/create-profile.dto";
 import { UpdateProfileDto } from "./dto/update-profile.dto";
 import { PrismaService } from "src/prisma/prisma.service";
+import { http } from "winston";
 
 @Injectable()
 export class ProfileService {
@@ -35,24 +36,32 @@ export class ProfileService {
 	}
 
 	async update(id: number, updateProfileDto: UpdateProfileDto) {
-		const update = await this.prisma.user.update({
-			where: {
-				id: id,
-			},
-			data: {
-				status: updateProfileDto.status,
-			},
-			select: {
-				id: true,
-				avatar: true,
-				status: true,
-				nickname: true,
-				user42: true,
-				connection_state: true,
-				experience_points: true,
-			},
-		});
-		return update;
+		try
+		{
+
+			const update = await this.prisma.user.update({
+				where: {
+					id: id,
+				},
+				data: {
+					status: updateProfileDto.status,
+				},
+				select: {
+					id: true,
+					avatar: true,
+					status: true,
+					nickname: true,
+					user42: true,
+					connection_state: true,
+					experience_points: true,
+				},
+			});
+			return update;
+		}
+		catch
+		{
+			throw new HttpException("Error Updating status", HttpStatus.BAD_REQUEST)
+		}
 	}
 
 	async getFriendship(id: number, friend: number) {

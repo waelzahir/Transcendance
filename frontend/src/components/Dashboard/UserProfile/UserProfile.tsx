@@ -7,6 +7,7 @@ import { ip } from "../../../network/ipaddr";
 import IUser from "../../../types/User";
 import { UploadTest } from "../../UploadComponent";
 import { SocketContext } from "../../Context/SocketContext";
+import HandleError from "../../../types/error";
 
 const useGetFrienshipsStatus = async (setisFriend: any, dashstate: IUser) => {
 	try {
@@ -40,26 +41,27 @@ export default function ProfileDiv({ status, who, usr, func }: { status: Map<str
 		else
 			setisFriend(false)
 	},[status])
-	const updateStatus = async () => {
-		const response = await fetch(`http://${ip}3001/profile/updateStatus`, {
+	const updateStatus =  () => {
+		fetch(`http://${ip}3001/profile/updateStatus`, {
 			method: "PATCH",
 			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				status: postContent,
+				status: postContent ,
 			}),
-		});
-
-		const data = await response.json();
-		if (!response.ok) {
-			toast.error(data.message);
-		} else {
-			func(data);
-			toast("Updated Succefully!");
-		}
-	};
+		}).then(response => {
+			if (!response.ok) {
+				HandleError(response)
+			} else {
+			response.json().then((data)=> {
+					func(data);
+					toast("Updated Succefully!");
+				}).catch(()=>{})
+			}
+		}).catch(()=>{})
+		};
 	const RmFR = () => {
         fetch(`http://${ip}3001/invite/friend?friend=${usr.id}`, {
             method: "DELETE",
@@ -67,14 +69,14 @@ export default function ProfileDiv({ status, who, usr, func }: { status: Map<str
         })
             .then((data) =>
 			{
-				if (data.status == 200)
+				if (data.status === 200)
+				{
 					toast("Deleted Friend succesfully")
-				else
-					toast.error("failed to delete friend")
-
-			} )
-          
-            .catch(() => toast.error(`RMFR: network error`));
+					return ;
+				}
+				HandleError(data)
+			})
+            .catch(()=>{});
     };
 const addFR = () => {
         fetch(`http://${ip}3001/invite/friend?friend=${usr.id}`, {
@@ -83,14 +85,13 @@ const addFR = () => {
         })
 		.then((data) =>
 		{
-			if (data.status <= 200)
+			if (data.status === 200)
+			{
 				toast("added Friend Succesfully")
-			else
-				toast.error("failed to add friend")
-
-		} )
-           
-            .catch(() => toast.error(`search: ror`));
+				return ;
+			}
+				HandleError(data)
+		}).catch(() => {});
     };
 	useGetFrienshipsStatus(setisFriend, usr);
 	return (
@@ -142,6 +143,7 @@ const addFR = () => {
 					{who ? (
 						<div>
 							<textarea
+								maxLength={700}
 								className="UserDescription min-[0px]:mt-3 mr-4 sm:mt-3 md:mt-4 min-[0px]:text-base md:text-lg w-[90%] min-h-[5rem] max-h-[12rem] text-[#959490] ring-4 p-3 m-1 border-black ring-black hover:ring-blue shadow-[2px_4px_0px_0px_#000301]"
 								placeholder={!usr?.status ? "Tell Us About Yourself ..." : usr?.status}
 								onChange={(e) => setPostContent(e.target.value)}

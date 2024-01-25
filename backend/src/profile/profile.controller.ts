@@ -21,8 +21,8 @@ export class ProfileController {
 	}
 
 	@Patch("updateStatus")
-	async update(@GetCurrentUserId() id: number, @Body() updateProfileDto: UpdateProfileDto) {
-		return await this.profileService.update(id, updateProfileDto);
+	async update(@GetCurrentUserId() id: number, @Body() status: UpdateProfileDto) {
+		return await this.profileService.update(id, status);
 	
 	}
 
