@@ -9,8 +9,8 @@ const useRefreshinterval = () => {
 	const getToken = useCallback(() => {
 		axios
 			.post("http://devlopment.ddns.net:3001/auth/refresh", {}, { withCredentials: true })
-			.then((res) => {
-				if (!res)
+			.then((res : Response  | any ) => {
+				if (!res.ok)
 					Promise.reject(res);
 			})
 			.catch((res): any => {
