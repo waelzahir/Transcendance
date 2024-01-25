@@ -40,6 +40,7 @@ export class RoomGuard implements CanActivate {
         {
             context.switchToWs().getClient().request.headers["user"] = request.user[key2];
             roomid = +context.switchToWs().getData().room;
+            console.log(roomid)
         }
         else
             roomid = +request.query["room"]
@@ -49,7 +50,10 @@ export class RoomGuard implements CanActivate {
         {
             
                 if (Number.isNaN(roomid))
+                {
+                    context.switchToWs().getClient().emit("ChatError", "wrong id")
                     return false;
+                }
                 const frdbroom = await this.prisma.rooms.findUnique({where: { id: roomid },});
                 if (!frdbroom)
                 {

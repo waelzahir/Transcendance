@@ -15,3 +15,5 @@ http ------->>>>
 
         if expects number and gets string or else
 ws: 
+    chat fix room guard sneaky roomid exeption fixed
+    
