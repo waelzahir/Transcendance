@@ -27,7 +27,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "vite --host --port 3000 ",
+    "start": "VITE_CJS_IGNORE_WARNING=true vite --host --port 3000 ",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
