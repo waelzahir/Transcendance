@@ -11,7 +11,7 @@ const useRefreshinterval = () => {
 			.post("http://devlopment.ddns.net:3001/auth/refresh", {}, { withCredentials: true })
 			.then((res : Response  | any ) => {
 				if (!res.ok)
-					Promise.reject(res);
+					return Promise.reject(res);
 			})
 			.catch((res): any => {
 				HandleError(res)
