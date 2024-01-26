@@ -230,18 +230,23 @@ export class AuthService {
 	}
 
 	async refreshTokens(userId: number, rt: string, res: Response): Promise<[Tokens, boolean]> {
-		const user = await this.prisma.user.findUnique({
-			where: {
-				id: userId,
-			},
-		});
-		if (!user || !user.hashedRt) throw new ForbiddenException("refresh token found");
-		const rtMatches = await argon.verify(user.hashedRt, rt);
-		if (!rtMatches) throw new ForbiddenException("refresh token not found");
+		try {
+			
+			const user = await this.prisma.user.findUnique({
+				where: {
+					id: userId,
+				},
+			});
+			if (!user || !user.hashedRt) throw new ForbiddenException("refresh token found");
+			const rtMatches = await argon.verify(user.hashedRt, rt);
+			if (!rtMatches) throw new ForbiddenException("refresh token not found");
+			const tokens = await this.getTokens(user.id, user.user42);
+			await this.updateRtHash(user.id, tokens.refresh_token);
+			return [tokens, !user.hash ? false : true];
+		} catch  {
+			throw new ForbiddenException("refresh token not found");
+		}
 
-		const tokens = await this.getTokens(user.id, user.user42);
-		await this.updateRtHash(user.id, tokens.refresh_token);
-		return [tokens, !user.hash ? false : true];
 	}
 
 	async updateRtHash(userId: number, rt: string): Promise<void> {

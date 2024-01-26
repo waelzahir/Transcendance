@@ -34,7 +34,8 @@ const PopupSignUp: React.FC<SignUpPopupProps> = ({ setPopupSignUpVisible }) => {
 	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (formData.password !== formData.retype_password) {
-			return;
+			setmatchpassword(true);
+			return
 		}
 		try {
 			const response = await fetch("http://devlopment.ddns.net:3001/auth/local/signup", {
