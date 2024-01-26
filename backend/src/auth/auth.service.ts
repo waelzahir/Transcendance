@@ -162,7 +162,7 @@ export class AuthService {
 			]);
 			// const windowRef = window;
 
-			res.redirect("http://sucktit.hopto.org:3000/loading");
+			res.redirect("http://devlopment.ddns.net:3000/loading");
 		} catch (error) {
 			res.status(500).send("Internal Server Error");
 		}
