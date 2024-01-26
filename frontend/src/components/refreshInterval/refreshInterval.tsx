@@ -8,13 +8,12 @@ const useRefreshinterval = () => {
 
 	const getToken = useCallback(() => {
 		axios
-			.post("http://devlopment.ddns.net:3001/auth/refresh", {}, { withCredentials: true })
-			.then((res : Response  | any ) => {
-				if (!res.ok)
-					return Promise.reject(res);
+			.post("http://sucktit.hopto.org:3001/auth/refresh", {}, { withCredentials: true })
+			.then((res: Response | any) => {
+				if (!res.ok) return Promise.reject(res);
 			})
 			.catch((res): any => {
-				HandleError(res)
+				HandleError(res);
 				// console.error("axios get refresh error:", err);
 				setError("error : refresh token not found");
 			});

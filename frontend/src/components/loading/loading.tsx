@@ -22,7 +22,7 @@ const Loading: FC<LoadingProps> = () => {
 						success: data ? true : false,
 						payload: data,
 					},
-					"http://devlopment.ddns.net:3000/"
+					"http://sucktit.hopto.org:3000/"
 				);
 			}
 		}
