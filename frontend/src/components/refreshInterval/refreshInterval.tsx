@@ -15,7 +15,6 @@ const useRefreshinterval = () => {
 			.catch((res): any => {
 				HandleError(res);
 				// console.error("axios get refresh error:", err);
-				setError("error : refresh token not found");
 			});
 	}, []);
 
