@@ -92,7 +92,7 @@ To simplify the deployment process, we've provided a `Makefile` that automates v
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/ft_trancesandance.git
+   git clone https://github.com/waelzahir/Trancesandance.git
    cd ft_trancesandance
    ```
 
@@ -104,7 +104,6 @@ To simplify the deployment process, we've provided a `Makefile` that automates v
    ```
 This command will initialize the backend, frontend, and database containers, ensuring that all dependencies are set up and running.
 
-4. Once the containers are up and running, you can access the website by opening a web browser and navigating to http://localhost:81 
 ---
 
 ## Contributors
