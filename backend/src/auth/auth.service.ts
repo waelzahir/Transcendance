@@ -162,7 +162,7 @@ export class AuthService {
 			]);
 			// const windowRef = window;
 
-			res.redirect("http://taha.redirectme.net/loading");
+			res.redirect("http://localhost/loading");
 		} catch (error) {
 			res.status(500).send("Internal Server Error");
 		}

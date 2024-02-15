@@ -14,7 +14,7 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	app.use(cookieParser());
 	app.enableCors({
-		origin: [`http://${ip}`, "http://taha.redirectme.net"],
+		origin: [`http://${ip}`, "http://localhost"],
 		methods: ["GET", "POST", "DELETE", "PATCH"],
 		credentials: true,
 	});

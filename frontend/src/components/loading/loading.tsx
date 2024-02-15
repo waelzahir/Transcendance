@@ -22,7 +22,7 @@ const Loading: FC<LoadingProps> = () => {
 						success: data ? true : false,
 						payload: data,
 					},
-					"http://taha.redirectme.net/"
+					"http://localhost/"
 				);
 			}
 		}

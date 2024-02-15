@@ -1,2 +1,2 @@
-const add = "taha.redirectme.net";
+const add = "localhost";
 export const ip = `${add}:`;
